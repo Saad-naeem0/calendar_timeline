@@ -314,7 +314,7 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         if (widget.showYears) _buildYearList(),
-        _buildMonthList(),
+        // _buildMonthList(),
         _buildDayList(),
       ],
     );
@@ -369,60 +369,60 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
   /// Creates the row with all the months in the calendar. If [widget.showYears] is set to true
   /// it will only show the months allowed in the selected year. By default it will show all
   /// months in the calendar and the small version of [YearItem] for each year in between
-  Widget _buildMonthList() {
-    return SizedBox(
-      height: 30,
-      child: ScrollablePositionedList.builder(
-        initialScrollIndex: _monthSelectedIndex ?? 0,
-        initialAlignment: _scrollAlignment,
-        itemScrollController: _controllerMonth,
-        padding: EdgeInsets.only(left: widget.leftMargin),
-        scrollDirection: Axis.horizontal,
-        itemCount: _months.length,
-        itemBuilder: (BuildContext context, int index) {
-          final currentDate = _months[index];
-          final monthName = DateFormat.MMMM(_locale).format(currentDate);
-
-          return Padding(
-            padding: const EdgeInsets.only(right: 12, left: 4),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                if (widget.firstDate.year != currentDate.year &&
-                    currentDate.month == 1 &&
-                    !widget.showYears)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: YearItem(
-                      name: DateFormat.y(_locale).format(currentDate),
-                      color: widget.monthColor,
-                      onTap: () {},
-                      shrink: widget.shrink,
-                    ),
-                  ),
-                MonthItem(
-                  isSelected: _monthSelectedIndex == index,
-                  name: monthName,
-                  onTap: () => _onSelectMonth(index),
-                  color: widget.monthColor,
-                  shrink: widget.shrink,
-                  activeColor: widget.activeBackgroundDayColor,
-                ),
-                if (index == _months.length - 1)
-                  // Last element to take space to do scroll to left side
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width -
-                        widget.leftMargin -
-                        (monthName.length * 10),
-                  )
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
+  // Widget _buildMonthList() {
+  //   return SizedBox(
+  //     height: 30,
+  //     child: ScrollablePositionedList.builder(
+  //       initialScrollIndex: _monthSelectedIndex ?? 0,
+  //       initialAlignment: _scrollAlignment,
+  //       itemScrollController: _controllerMonth,
+  //       padding: EdgeInsets.only(left: widget.leftMargin),
+  //       scrollDirection: Axis.horizontal,
+  //       itemCount: _months.length,
+  //       itemBuilder: (BuildContext context, int index) {
+  //         final currentDate = _months[index];
+  //         final monthName = DateFormat.MMMM(_locale).format(currentDate);
+  //
+  //         return Padding(
+  //           padding: const EdgeInsets.only(right: 12, left: 4),
+  //           child: Row(
+  //             mainAxisSize: MainAxisSize.min,
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: <Widget>[
+  //               if (widget.firstDate.year != currentDate.year &&
+  //                   currentDate.month == 1 &&
+  //                   !widget.showYears)
+  //                 Padding(
+  //                   padding: const EdgeInsets.only(right: 10),
+  //                   child: YearItem(
+  //                     name: DateFormat.y(_locale).format(currentDate),
+  //                     color: widget.monthColor,
+  //                     onTap: () {},
+  //                     shrink: widget.shrink,
+  //                   ),
+  //                 ),
+  //               MonthItem(
+  //                 isSelected: _monthSelectedIndex == index,
+  //                 name: monthName,
+  //                 onTap: () => _onSelectMonth(index),
+  //                 color: widget.monthColor,
+  //                 shrink: widget.shrink,
+  //                 activeColor: widget.activeBackgroundDayColor,
+  //               ),
+  //               if (index == _months.length - 1)
+  //                 // Last element to take space to do scroll to left side
+  //                 SizedBox(
+  //                   width: MediaQuery.of(context).size.width -
+  //                       widget.leftMargin -
+  //                       (monthName.length * 10),
+  //                 )
+  //             ],
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 
   /// Creates the row with the day of the [selectedDate.month]. If the
   /// [selectedDate.year] && [selectedDate.month] is the [widget.firstDate] or [widget.lastDate]
